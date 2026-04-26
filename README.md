@@ -7,6 +7,8 @@
 
 A visual page builder plugin for Filament that uses GrapeJS v3 to let admins create and edit pages with a drag-and-drop interface.
 
+![Filamanetphp + grapejs](assets/banner.png)
+
 ## How to Use This Plugin
 
 ### 1. Installation & Setup
