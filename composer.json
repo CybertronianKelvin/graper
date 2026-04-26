@@ -1,10 +1,15 @@
 {
     "name": "cybertroniankelvin/graper",
-    "description": "GrapeJS page builder for Filament",
+    "description": "A visual drag-and-drop page builder for Filament admin panels, powered by GrapeJS v3. Build landing pages, marketing sites, and custom content pages without writing code.",
     "keywords": [
-        "graper",
+        "filament",
         "laravel",
-        "grapejs"
+        "grapejs",
+        "page-builder",
+        "cms",
+        "drag-and-drop",
+        "visual-editor",
+        "admin"
     ],
     "homepage": "https://github.com/cybertroniankelvin/graper",
     "license": "MIT",
