@@ -36,7 +36,7 @@ class GraperServiceProvider extends PackageServiceProvider
 
         FilamentAsset::register([
             Css::make('graper-editor-css', 'https://unpkg.com/grapesjs/dist/css/grapes.min.css'),
-            Js::make('graper-editor', __DIR__ . '/../dist/grapesjs/index.js'),
+            Js::make('graper-editor', __DIR__.'/../dist/grapesjs/index.js'),
         ], 'graper');
     }
 
