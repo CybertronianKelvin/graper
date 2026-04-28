@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'page_route_prefix' => '/',
+    'page_route_prefix' => 'pages',
 
     'include_tailwind' => true,
 
