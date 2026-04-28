@@ -34,8 +34,7 @@ class GraperPageResource extends Resource
     {
         return $schema->components([
             TextInput::make('title')
-                ->required()
-                ->columnSpan(2),
+                ->required(),
             TextInput::make('slug')
                 ->unique(ignoreRecord: true)
                 ->required(),
@@ -44,13 +43,12 @@ class GraperPageResource extends Resource
                 ->options([true => 'Yes', false => 'No'])
                 ->default(false)
                 ->required(),
-            DateTimePicker::make('published_at')
-                ->columnSpan(2),
+            DateTimePicker::make('published_at'),
             GrapesJsField::make('content')
                 ->loadDefaultBlocks()
                 ->minHeight('70vh')
                 ->columnSpanFull(),
-        ])->columns(3);
+        ])->columns(2);
     }
 
     public static function table(Table $table): Table

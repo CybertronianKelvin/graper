@@ -35,17 +35,17 @@ class GraperServiceProvider extends PackageServiceProvider
         $this->registerDisplayRoute();
 
         FilamentAsset::register([
-            Css::make('graper-editor', 'https://unpkg.com/grapesjs/dist/css/grapes.min.css'),
-            Js::make('graper-editor', __DIR__.'/../dist/grapesjs/index.js'),
+            Css::make('graper-editor-css', 'https://unpkg.com/grapesjs/dist/css/grapes.min.css'),
+            Js::make('graper-editor', asset('build/grapesjs/index.js')),
         ], 'graper');
     }
 
     protected function registerDisplayRoute(): void
     {
-        $prefix = trim(config('graper.page_route_prefix', ''), '/');
+        $prefix = trim(config('graper.page_route_prefix', 'pages') ?? 'pages', '/');
 
-        if ($prefix === '') {
-            return;
+        if (empty($prefix)) {
+            $prefix = 'pages';
         }
 
         Route::get('/'.$prefix.'/{slug}', [GraperPageController::class, 'display'])
