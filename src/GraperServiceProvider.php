@@ -31,8 +31,6 @@ class GraperServiceProvider extends PackageServiceProvider
     {
         parent::boot();
 
-        view()->addNamespace('graper', base_path('packages/graper/resources/views'));
-
         $this->loadRoutes();
         $this->registerDisplayRoute();
 
@@ -44,12 +42,16 @@ class GraperServiceProvider extends PackageServiceProvider
 
     protected function registerDisplayRoute(): void
     {
-        $prefix = trim(config('graper.page_route_prefix', '/'), '/');
-        $path = $prefix === '' ? '/{slug}' : '/'.$prefix.'/{slug}';
+        $prefix = trim(config('graper.page_route_prefix', ''), '/');
 
-        Route::get($path, [GraperPageController::class, 'display'])
+        if ($prefix === '') {
+            return;
+        }
+
+        Route::get('/'.$prefix.'/{slug}', [GraperPageController::class, 'display'])
             ->middleware('web')
-            ->name('graper.page.display');
+            ->name('graper.page.display')
+            ->where('slug', '[a-z0-9-]+');
     }
 
     protected function loadRoutes(): void
