@@ -16,6 +16,8 @@ class GraperInstallCommand extends Command
     {
         $this->info('Installing Graper...');
 
+        $this->call('filament:install', ['--panels' => true]);
+
         $this->call('vendor:publish', [
             '--provider' => 'CybertronianKelvin\Graper\GraperServiceProvider',
             '--tag' => 'graper-config',
