@@ -27,6 +27,7 @@ class EditGraperPage extends EditRecord
                 ->url(fn (Model $record) => route('graper.page.display', ['slug' => $record->slug]))
                 ->openUrlInNewTab()
                 ->color('gray'),
+            Actions\DeleteAction::make(),
         ];
     }
 

@@ -11,13 +11,15 @@ use CybertronianKelvin\Graper\Resources\GraperPageResource\Pages\EditGraperPage;
 use CybertronianKelvin\Graper\Resources\GraperPageResource\Pages\ListGraperPages;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
-use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 
 class GraperPageResource extends Resource
@@ -38,12 +40,9 @@ class GraperPageResource extends Resource
             TextInput::make('slug')
                 ->unique(ignoreRecord: true)
                 ->required(),
-            Select::make('is_published')
+            Toggle::make('is_published')
                 ->label('Published')
-                ->options([true => 'Yes', false => 'No'])
-                ->default(false)
-                ->required(),
-            DateTimePicker::make('published_at'),
+                ->default(false),
             GrapesJsField::make('content')
                 ->loadDefaultBlocks()
                 ->minHeight('70vh')
@@ -55,16 +54,34 @@ class GraperPageResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id'),
-                TextColumn::make('title'),
-                TextColumn::make('slug'),
-                IconColumn::make('is_published'),
-                TextColumn::make('created_at')->dateTime(),
+                TextColumn::make('id')
+                    ->sortable(),
+                TextColumn::make('title')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('slug')
+                    ->searchable(),
+                IconColumn::make('is_published')
+                    ->boolean()
+                    ->sortable(),
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable(),
+            ])
+            ->filters([
+                TernaryFilter::make('is_published')
+                    ->label('Published'),
             ])
             ->actions([
                 EditAction::make(),
                 DeleteAction::make(),
-            ]);
+            ])
+            ->bulkActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
+            ])
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getPages(): array
