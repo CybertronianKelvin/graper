@@ -6,7 +6,7 @@ We support the latest version of Graper. We recommend always using the most rece
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability within Graper, please send an email to Kelvin Atawura at kataswura@gmail.com. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within Graper, please submit a pull request. All security vulnerabilities will be promptly addressed.
 
 Please include the following information:
 
